@@ -14,7 +14,9 @@ class BasesTest(unittest.TestCase):
         assert decode('10', 8) == 8
         assert decode('10', 10) == 10
         assert decode('10', 16) == 16
+        assert decode('9', 16) == 9
         assert decode('10', 32) == 32
+        assert decode('d', 16) == 13
 
         assert decode('101', 2) == 5
         assert decode('101', 3) == 10
