@@ -4,6 +4,7 @@ import string
 
 ALPHA = "0123456789abcdefghijklmnopqrstuv"
 
+
 def decode(str_num, base):
     """
     Decode given number from given base to base 10.
@@ -11,12 +12,22 @@ def decode(str_num, base):
     base -- base of given number
     """
     assert 2 <= base <= 36
+
+    negative = False
     result = 0
     for index, char in enumerate(reversed(list(str_num))):
+        # if char == '-':
+        #     negative = True
+        #     continue
         next_digit = to_digit(char)
         result += base ** index * next_digit
+    # if negative:
+    #     result = twos_complement(result)
     return result
 
+
+def twos_complement(num):
+    return (~num) + 1
 
 
 def encode(num, base):
@@ -28,8 +39,8 @@ def encode(num, base):
     assert 2 <= base <= 36
     result = ''
     while num > 0:
-        digit = get_digit_string(num, base)
-        result = digit + result
+        digit_str = get_digit_string(num, base)
+        result = digit_str + result
         num = num / base
     return result
 
