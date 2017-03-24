@@ -8,7 +8,7 @@ class TestRecursion(unittest.TestCase):
     def test_factorial_with_small_integers(self):
         # factorial should return the product n*(n-1)*...*2*1 for n >= 0
         assert factorial(0) == 1  # base case
-        assert factorial(1) == 1  # base case
+        assert factorial(1) == 1  # base case(does an extra recursive call if not present)
         assert factorial(2) == 2*1
         assert factorial(3) == 3*2*1
         assert factorial(4) == 4*3*2*1
