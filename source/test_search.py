@@ -36,7 +36,7 @@ class TestSearch(unittest.TestCase):
     def test_binary_search_with_none_list(self):
         names = None
         assert binary_search(names, 'Trap') is None
-
+    
     def test_banary_search_with_empty_list(self):
         names = []
         assert binary_search(names, 'No one') is None

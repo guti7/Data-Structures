@@ -23,44 +23,61 @@ def linear_search_recursive(array, item, index=0):
     # index - has default value of 0 is none is given
 
     # check for None list and if you are at the end of the array
-    if array is None or len(array) == index:
+    if array is None or index < 0 or len(array) <= index:
         return None
     if array[index] == item:  # check if you have found the item
         return index
-    return linear_search_recursive(array, item, index + 1)
+    elif index < len(array):
+        return linear_search_recursive(array, item, index + 1)
 
 
 def binary_search(array, item):
     """Return the index of item in sorted array or None if item is not found."""
     # implement binary_search_iterative and binary_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
-    return binary_search_iterative(array, item)
-    # return binary_search_recursive(array, item)
+    # return binary_search_iterative(array, item)
+    return binary_search_recursive(array, item)
 
 
 def binary_search_iterative(array, item):
-    # implement binary search iteratively here
+    # implement binary search iteratively.
 
-    # check for None list and if you are at the end of the array
-    if not array:
-        return None
-
-    array.sort()
-    left = 0
-    right = len(array) - 1
-    while left <= right:
-        middle = int((left + right) / 2)
-        if array[middle] < item:
-            left = middle + 1
-        elif array[middle] > item:
-            right = middle - 1
-        else:  # array(index) == item , item found
-            return middle
+    # check for None list
+    if array:
+        array.sort()
+        left = 0
+        right = len(array) - 1
+        while left <= right:
+            middle = int((left + right) / 2)
+            if array[middle] < item:
+                left = middle + 1
+            elif array[middle] > item:
+                right = middle - 1
+            else:  # array(index) == item , item found
+                return middle
     return None
 
 
 def binary_search_recursive(array, item, left=None, right=None):
-    # TODO: implement binary search recursively here
-    pass
-    # once implemented, change binary_search to call binary_search_recursive
-    # to verify that your recursive implementation passes all tests below
+    # implement binary search recursively.
+
+    if array is None:
+        return None
+
+    if left is None:
+        left = 0
+    if right is None:
+        right = len(array) - 1
+
+    middle = int((left + right) / 2)
+    if left > right:
+        return None
+    elif array[middle] == item:
+        return middle
+    elif array[middle] < item:
+        left = middle + 1
+        # return binary_search_recursive(array, item, middle + 1, right)
+    else:  # array[middle] > item:
+        right = middle - 1
+        # return binary_search_recursive(array, item, left, middle - 1)
+    return binary_search_recursive(array, item, left, right)
