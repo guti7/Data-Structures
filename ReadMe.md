@@ -14,6 +14,8 @@
 ### [Class 2](Class2.md): Wednesday, March 22 – Recursion & Search Algorithms
 >>>>>>> d4e4c1be7c34ae542eaf020b6b9c6e4edf1e961e
 
+### [Class 3](Class3.md): Friday, March 24 – String Algorithms
+
 
 ## Working with this GitHub repository
 
