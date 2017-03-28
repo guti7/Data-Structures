@@ -2,6 +2,7 @@
 
 # Hint: use string.ascii_letters (all letters in ASCII character set)
 import string
+import re
 
 
 def is_palindrome(text):
@@ -18,7 +19,9 @@ def is_palindrome_iterative(text):
     # TODO: implement the is_palindrome function iteratively here
     if len(text) <= 1:
         return True
-    text = text.lower()
+    text = text.lower()  # change to lowercase
+    text = re.sub(r"[^a-z]*", '', text)  # substitute all non letters
+    print(text)
     for index, ch in enumerate(text):
         if ch is not text[len(text) - 1 - index]:
             return False
