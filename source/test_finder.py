@@ -23,11 +23,11 @@ class TestFinder(unittest.TestCase):
         pattern = None
         assert find(string, pattern) is False
 
-    def DISABLED_test_find_with_empty_pattern(self):
-        string = ''
-        pattern = ''
-        assert find(string, pattern) is True
+    def test_find_with_empty_pattern(self):
         string = 'a'
+        pattern = ''
+        assert find(string, pattern) is False
+        string = ''
         pattern = ''
         assert find(string, pattern) is False
 
