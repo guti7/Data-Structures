@@ -5,8 +5,8 @@ def find(string, pattern):
     """return true if string contains the entire pattern, false otherwise."""
     # implement find_iterative and find_recursive
     # assert isinstance(string, str)
-    return find_iterative(string, pattern)
-    # return find_recursive(string, pattern)
+    # return find_iterative(string, pattern)
+    return find_recursive(string, pattern)
 
 
 def find_iterative(string, pattern):
@@ -23,9 +23,17 @@ def find_iterative(string, pattern):
     return False
 
 
-def find_recursive(string, pattern):
+def find_recursive(string, pattern, str_index=0, ptr_index=0):
     # TODO: implement find_recursive
-    pass
+    if not string or not pattern:
+        return False
+    if ptr_index == len(pattern):
+        return True
+    if str_index == len(string):
+        return False
+    if string[str_index] == pattern[ptr_index]:
+        return find_recursive(string, pattern, str_index + 1, ptr_index + 1)
+    return find_recursive(string, pattern, str_index + 1, 0)
 
 
 def find_index(string, pattern):
