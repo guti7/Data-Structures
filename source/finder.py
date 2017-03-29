@@ -43,12 +43,12 @@ def find_index(string, pattern):
     and None if not found.
     """
     # implement find_index_iterative and find_index_recursive
-    return find_index_iterative(string, pattern)
-    # return find_index_recursive(string, pattern)
+    # return find_index_iterative(string, pattern)
+    return find_index_recursive(string, pattern)
 
 
 def find_index_iterative(string, pattern):
-    # TODO: implement
+    # implement
     if not string or not pattern:
         return None
     pat_index = 0
@@ -62,9 +62,17 @@ def find_index_iterative(string, pattern):
     return None
 
 
-def find_index_recursive(string, pattern):
+def find_index_recursive(string, pattern, str_index=0, ptr_index=0):
     # TODO: implement
-    pass
+    if not string or not pattern:
+        return None
+    if ptr_index == len(pattern):
+        return str_index - ptr_index
+    if str_index == len(string):
+        return None
+    if string[str_index] == pattern[ptr_index]:
+        return find_index_recursive(string, pattern, str_index + 1, ptr_index + 1)
+    return find_index_recursive(string, pattern, str_index + 1, 0)
 
 
 # STRETCH:
