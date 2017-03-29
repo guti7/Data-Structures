@@ -49,7 +49,17 @@ def find_index(string, pattern):
 
 def find_index_iterative(string, pattern):
     # TODO: implement
-    pass
+    if not string or not pattern:
+        return None
+    pat_index = 0
+    for index, char in enumerate(string):
+        if char == pattern[pat_index]:
+            pat_index += 1
+        else:
+            pat_index = 0
+        if pat_index == len(pattern):
+            return index - pat_index + 1
+    return None
 
 
 def find_index_recursive(string, pattern):
