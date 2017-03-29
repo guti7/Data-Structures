@@ -18,10 +18,8 @@ def linear_search_iterative(array, item):
 
 def linear_search_recursive(array, item, index=0):
     # implement linear search recursively here
-    # once implemented, change linear_search to call linear_search_recursive
-    # to verify that your recursive implementation passes all tests below
-    # index - has default value of 0 is none is given
-
+    # verify that your recursive implementation passes all tests below
+    # index - has default value of 0 if none is given
     # check for None list and if you are at the end of the array
     if array is None or index < 0 or len(array) <= index:
         return None
