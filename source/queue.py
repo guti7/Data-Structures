@@ -50,7 +50,7 @@ class LinkedQueue(object):
 # implement ArrayQueue below, then change the assignment at the bottom
 # to use this Queue implementation to verify it passes all tests
 class ArrayQueue(object):
-
+# FIFO
     def __init__(self, iterable=None):
         """Initialize this queue and enqueue the given items, if any"""
         # Initialize a new dynamic array to store the items
@@ -93,5 +93,5 @@ class ArrayQueue(object):
 
 # implement LinkedQueue and ArrayQueue above, then change the assignment below
 # to use each of your Queue implementations to verify they each pass all tests
-Queue = LinkedQueue
-# Queue = ArrayQueue
+# Queue = LinkedQueue
+Queue = ArrayQueue
