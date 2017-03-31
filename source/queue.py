@@ -50,7 +50,7 @@ class LinkedQueue(object):
 # implement ArrayQueue below, then change the assignment at the bottom
 # to use this Queue implementation to verify it passes all tests
 class ArrayQueue(object):
-# FIFO
+    # FIFO
     def __init__(self, iterable=None):
         """Initialize this queue and enqueue the given items, if any"""
         # Initialize a new dynamic array to store the items
@@ -61,34 +61,38 @@ class ArrayQueue(object):
 
     def __repr__(self):
         """Return a string representation of this queue"""
-        return 'Queue({} items, top={})'.format(self.length(), self.front())
+        return 'Queue({} items, front={})'.format(self.length(), self.front())
 
     def is_empty(self):
         """Return True if this queue is empty, or False otherwise"""
-        # TODO: Check if empty
-        pass
+        # Check if empty
+        return self.length() == 0
 
     def length(self):
         """Return the number of items in this queue"""
-        # TODO: Count number of items
-        pass
+        # Count number of items
+        return len(self.list)
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue"""
-        # TODO: Insert given item
-        pass
+        # Insert given item, at the end of list
+        self.list.append(item)
 
     def front(self):
         """Return the item at the front of this queue without removing it,
         or None if this queue is empty"""
-        # TODO: Return front item, if any
-        pass
+        # Return front item, if any. The front is the start of the list
+        return self.list[0] if not self.is_empty() else None
 
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty"""
-        # TODO: Remove and return front item, if any
-        pass
+        # Remove and return front item, if any
+        if not self.is_empty():
+            deq = self.front()
+            self.list.remove(deq)
+            return deq
+        raise ValueError("Can't dequeue empty queue: {}".format(self.list))
 
 
 # implement LinkedQueue and ArrayQueue above, then change the assignment below
