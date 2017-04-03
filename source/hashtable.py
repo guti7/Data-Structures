@@ -123,10 +123,7 @@ class HashTable(object):
         # Check if the load factor exceeds a threshold such as 0.75
         if self.load_factor() > 0.75:
             # If so, automatically resize to reduce the load factor
-            print("needs resize")
             self._resize()
-        elif self.load_factor() < 0.10:
-            self._resize(new_size=0)
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError"""
@@ -155,6 +152,11 @@ class HashTable(object):
             bucket.delete(entry)
             self.size -= 1
             # Is resizing necessary?
+            if self.load_factor() < 0.25 and self.size > 8:
+                # if self.size < 8:
+                #     self._resize(new_size=8)
+                # else:
+                self._resize(new_size=0)
         else:  # Not found
             raise KeyError('Key not found: {}'.format(key))
 
@@ -192,8 +194,18 @@ def test_hash_table():
     print('Deleting entries:')
     ht.delete('I')
     print('delete(I): ' + str(ht))
+    print('size: ' + str(ht.size))
+    print('length: ' + str(ht.length()))
+    print('buckets: ' + str(len(ht.buckets)))
+    print('load_factor: ' + str(ht.load_factor()))
+
     ht.delete('V')
     print('delete(V): ' + str(ht))
+    print('size: ' + str(ht.size))
+    print('length: ' + str(ht.length()))
+    print('buckets: ' + str(len(ht.buckets)))
+    print('load_factor: ' + str(ht.load_factor()))
+
     ht.delete('X')
     print('delete(X): ' + str(ht))
     ht.delete('L')
