@@ -25,8 +25,19 @@ class HashTable(object):
 
     def load_factor(self):
         """Return the load factor, the ratio of number of entries to buckets"""
-        # TODO: Calculate load factor
-        # return ...
+        # Calculate load factor
+        return float(self.size) / len(self.buckets)
+        # return 0 if self.length() == 0 else 1.0 * self.size / len(self.buckets)
+
+    # def _find_bucket(key):
+    #     index = self._bucket_index(key)
+    #     bucket = self.buckets[index]
+    #     return bucket
+
+    # def _find_entry(key):
+    #     bucket = _find_bucket(key)
+    #     entry = bucket.find(lambda (k, v): k == key)
+    #     return entry
 
     def _resize(self, new_size=None):
         """Resize this hash table's buckets and rehash all key-value entries.
@@ -35,16 +46,18 @@ class HashTable(object):
         # If unspecified, choose new size dynamically based on current size
         if new_size is None:
             new_size = self.size * 2  # Double size
-        # Option to reduce size if buckets are sparsely filled (low load factor)
+        # Reduce size if buckets are sparsely filled (low load factor)
         elif new_size is 0:
             new_size = self.size / 2  # Half size
-        # TODO: Get a list to temporarily hold all current key-value entries
-        # ...
-        # TODO: Create a new list of new_size total empty linked list buckets
-        # ...
-        # TODO: Insert each key-value entry into the new list of buckets,
+        # Get a list to temporarily hold all current key-value entries
+        temp_entries = self.items()
+        self.size = 0
+        # Create a new list of new_size total empty linked list buckets
+        self.buckets = [LinkedList() for i in range(new_size)]
+        # Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
-        # ...
+        for key, value in temp_entries:
+            self.set(key, value)
 
     def keys(self):
         """Return a list of all keys in this hash table"""
@@ -91,6 +104,30 @@ class HashTable(object):
         entry = bucket.find(lambda (k, v): k == key)
         return entry is not None  # True or False
 
+    def set(self, key, value):
+        """Insert or update the given key with its associated value"""
+        # Find the bucket the given key belongs in
+        index = self._bucket_index(key)
+        bucket = self.buckets[index]
+        # Find the entry with the given key in that bucket, if one exists
+        # Check if an entry with the given key exists in that bucket
+        entry = bucket.find(lambda (k, v): k == key)
+        if entry is not None:  # Found
+            # In this case, the given key's value is being updated
+            # Remove the old key-value entry from the bucket first
+            bucket.delete(entry)
+            self.size -= 1
+        # Insert the new key-value entry into the bucket in either case
+        bucket.append((key, value))
+        self.size += 1
+        # Check if the load factor exceeds a threshold such as 0.75
+        if self.load_factor() > 0.75:
+            # If so, automatically resize to reduce the load factor
+            print("needs resize")
+            self._resize()
+        elif self.load_factor() < 0.10:
+            self._resize(new_size=0)
+
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError"""
         # Find the bucket the given key belongs in
@@ -106,25 +143,6 @@ class HashTable(object):
         else:  # Not found
             raise KeyError('Key not found: {}'.format(key))
 
-    def set(self, key, value):
-        """Insert or update the given key with its associated value"""
-        # Find the bucket the given key belongs in
-        index = self._bucket_index(key)
-        bucket = self.buckets[index]
-        # Find the entry with the given key in that bucket, if one exists
-        # Check if an entry with the given key exists in that bucket
-        entry = bucket.find(lambda (k, v): k == key)
-        if entry is not None:  # Found
-            # In this case, the given key's value is being updated
-            # Remove the old key-value entry from the bucket first
-            bucket.delete(entry)
-        # Insert the new key-value entry into the bucket in either case
-        bucket.append((key, value))
-        # TODO: Check if the load factor exceeds a threshold such as 0.75
-        # ...
-        # TODO: If so, automatically resize to reduce the load factor
-        # ...
-
     def delete(self, key):
         """Delete the given key and its associated value, or raise KeyError"""
         # Find the bucket the given key belongs in
@@ -135,6 +153,8 @@ class HashTable(object):
         if entry is not None:  # Found
             # Remove the key-value entry from the bucket
             bucket.delete(entry)
+            self.size -= 1
+            # Is resizing necessary?
         else:  # Not found
             raise KeyError('Key not found: {}'.format(key))
 
