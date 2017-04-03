@@ -17,6 +17,9 @@
 
 ### [Class 5](Class5.md): Wednesday, March 29 – List, Stack & Queue
 
+### [Class 6](Class6.md): Friday, March 31 – Map & Hash Table
+
+
 ## Working with this GitHub repository
 
 This repository (located at `https://github.com/MakeSchool-18/Data-Structures`) is the course's _origin_ repository which will contain course materials including links, slides, and challenges.
