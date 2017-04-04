@@ -76,10 +76,21 @@ class HashSetTest(unittest.TestCase):
         set_c = HashSet([1])
         assert set_a.intersection(set_c).elements() == [1]
 
-    def DISABLE_test_difference(self):
-        # TODO: complete this test
-        pass
+    def test_difference(self):
+        set_a = HashSet([1, 2, 3])
+        set_b = HashSet([4, 2, 3])
+        assert set_a.difference(set_b).elements() == [1]
+        set_c = HashSet([1])
+        assert set_a.difference(set_c).elements() == [2, 3]
 
-    def DISABLE_test_is_subset(self):
-        # TODO: complete this test
-        pass
+    def test_is_subset(self):
+        set_a = HashSet([1, 2, 3])
+        set_b = HashSet([4, 2, 3])
+        assert set_a.is_subset(set_b) is False
+        assert set_b.is_subset(set_a) is False
+        set_c = HashSet([1])
+        assert set_a.is_subset(set_c) is False
+        assert set_c.is_subset(set_a) is True
+        set_d = HashSet([2, 3])
+        assert set_d.is_subset(set_a) is True
+        assert set_d.is_subset(set_b) is True

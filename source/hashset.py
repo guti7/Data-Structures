@@ -20,22 +20,22 @@ class HashSet(object):
         return '{' + ', '.join(elements_as_str) + '}'
 
     def __repr__(self):
-        """Returns a string representation of this set."""
+        """Return a string representation of this set."""
         return 'Set({})'.format(repr(self.elements()))
 
     def elements(self):
-        """Returns a list of all elements in this set."""
+        """Return a list of all elements in this set."""
         return self.collection.keys()
 
     def add(self, element):
-        """Adds element to this set, if not present already."""
+        """Add element to this set, if not present already."""
         # TODO: What to return? Nothing?
         self.collection.set(element, 0)
         self.size = self.collection.size
         # self.size += 1
 
     def remove(self, element):
-        """Removes element from this set, if present."""
+        """Remove element from this set, if present."""
         # TODO: Do we return the element? what if it's not found??
         self.collection.delete(element)
         self.size = self.collection.size
@@ -46,11 +46,11 @@ class HashSet(object):
         #     print('do something with the error')
 
     def contains(self, element):
-        """Returns true if element is in this set, false Otherwise."""
+        """Return true if element is in this set, false Otherwise."""
         return self.collection.contains(element)
 
     def union(self, other_set):
-        """Returns the union of this set and other_set."""
+        """Return the union of this set and other_set."""
         # What is the union of two sets?
         # Union is the set of all elements in both sets
         # AuB = {x: x -> A or x -> B}
@@ -61,7 +61,7 @@ class HashSet(object):
         return union
 
     def intersection(self, other_set):
-        """Returns the intersection of this set and other_set."""
+        """Return the intersection of this set and other_set."""
         # What is the intersection of two sets?
         # The new set with elements common to both sets.
         intersection = HashSet()
@@ -71,16 +71,29 @@ class HashSet(object):
         return intersection
 
     def difference(self, other_set):
-        """Returns the difference of thi sest and other_set."""
-        # The new set with elements in this set that are not in the other_set
-        # TODO: What is the difference of two sets?
-        pass
+        """Return the difference of this set and other_set."""
+        # What is the difference of two sets?
+        # Remove the elements of B contained in A.
+        # A - B = A \ B = { x E A | x nE B}
+        # The new set with elements in this this set, but not in the other.
+        difference = HashSet()
+        # for element in other_set.elements():
+        #     if not self.contains(element):
+        #         difference.add(element)
+        # return difference
+        for element in self.elements():
+            if not other_set.contains(element):
+                difference.add(element)
+        return difference
 
     def is_subset(self, other_set):
-        """Returns whether other_set is a subset of this set."""
+        """Return whether other_set is a subset of this set."""
+        # What is a subset of two sets?
         # Tests whether every element in this set is in the other_set
-        # TODO: What is a subset of two sets?
-        pass
+        for element in self.elements():
+            if not other_set.contains(element):
+                return False
+        return True
 
 def test_hash_set():
     hs = HashSet()
@@ -126,6 +139,36 @@ def test_hash_set():
     union = set_a.union(set_b)
     print('AuB = ' + str(union))
     print('size AuB: ' + str(union.size))
+
+    print('******')
+    print('Intersection of sets:')
+    set_a = HashSet([1, 3, 5, 6])
+    print('set A: ' + str(set_a))
+    set_b = HashSet([1, 2, 5])
+    print('set B: ' + str(set_b))
+    union = set_a.intersection(set_b)
+    print('AnB = ' + str(union))
+    print('size AuB: ' + str(union.size))
+
+    print('******')
+    print('Difference of sets:')
+    set_a = HashSet([1, 3, 5, 6])
+    print('set A: ' + str(set_a))
+    set_b = HashSet([1, 2, 5])
+    print('set B: ' + str(set_b))
+    union = set_a.difference(set_b)
+    print('A\B = ' + str(union))
+    print('size A\B: ' + str(union.size))
+
+    print('******')
+    print('Subset of sets:')
+    set_a = HashSet([1, 2, 3, 5, 6])
+    print('set A: ' + str(set_a))
+    set_b = HashSet([1, 2, 5])
+    print('set B: ' + str(set_b))
+    print('A is a subset of B = ' + str(set_a.is_subset(set_b)))
+    print('B is a subset of A = ' + str(set_b.is_subset(set_a)))
+    print('B is a subset of B = ' + str(set_b.is_subset(set_b)))
 
 
 
