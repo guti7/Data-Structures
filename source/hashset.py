@@ -96,6 +96,8 @@ class HashSet(object):
         return True
 
 def test_hash_set():
+
+    # TODO: Test for empty sets combinations and operations
     hs = HashSet()
     print('HashSet: ' + str(hs))
     print('HashSet: ' + repr(hs))
