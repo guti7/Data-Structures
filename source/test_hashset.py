@@ -8,7 +8,7 @@ class HashSetTest(unittest.TestCase):
     def test_init(self):
         hs = HashSet()
         assert hs.size == 0
-        # TODO: Test elements sequence
+        # Test elements with given sequence
         elements = [0, 1, 2, 1, 0]
         hs = HashSet(elements)
         assert hs.size == 3
@@ -23,7 +23,6 @@ class HashSetTest(unittest.TestCase):
         assert hs.size == 2
         hs.add(3)
         assert hs.size == 3
-
 
     def test_add(self):
         hs = HashSet()
@@ -51,7 +50,6 @@ class HashSetTest(unittest.TestCase):
             hs.remove('zero')
         with self.assertRaises(KeyError):
             hs.remove('0')
-        # assert hs.remove('0') == None
 
     def test_contains(self):
         hs = HashSet()
@@ -64,16 +62,19 @@ class HashSetTest(unittest.TestCase):
         assert hs.contains('0') is False
         assert hs.contains(2) is False
 
-    def DISABLE_test_union(self):
-        # TODO: complete this test
-        hash_set1 = hs.HashSet([1, 2, 3])
-        hash_set2 = hs.HashSet([4, 5, 6])
-        assert hash_set1.union(hash_set2) == [1, 2, 3, 4, 5, 6]
+    def test_union(self):
+        set_a = HashSet([1, 2, 3])
+        set_b = HashSet([4, 5, 6])
+        assert set_a.union(set_b).elements() == [1, 2, 3, 4, 5, 6]
+        set_c = HashSet([1, 1, 1])
+        assert set_a.union(set_c).elements() == [1, 2, 3]
 
-    def DISABLE_test_intersection(self):
-        # TODO: complete this test
-        assert self.fail('Implement')
-        pass
+    def test_intersection(self):
+        set_a = HashSet([1, 2, 3])
+        set_b = HashSet([4, 2, 3])
+        assert set_a.intersection(set_b).elements() == [2, 3]
+        set_c = HashSet([1])
+        assert set_a.intersection(set_c).elements() == [1]
 
     def DISABLE_test_difference(self):
         # TODO: complete this test
