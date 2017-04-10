@@ -29,24 +29,32 @@ class HashSet(object):
 
     def add(self, element):
         """Add element to this set, if not present already."""
-        # TODO: What to return? Nothing?
-        self.collection.set(element, 0)
+
+        unit_type = True
+        # TODO: What to return? Nothing? How does the set work? How many passes are there?
+        self.collection.set(element, unit_type)
         self.size = self.collection.size
         # self.size += 1
 
     def remove(self, element):
         """Remove element from this set, if present."""
         # TODO: Do we return the element? what if it's not found??
-        self.collection.delete(element)
-        self.size = self.collection.size
+        try:
+            self.collection.delete(element)
+            self.size = self.collection.size
+        except KeyError as error:
+            raise ValueError('Element not found: {}'.format(element))
+
         # self.size -= 1
         # try:
         #     self.collection.delete(element)
+        #     self.size = self.collection.size
         # except KeyError as error:
         #     print('do something with the error')
 
     def contains(self, element):
         """Return true if element is in this set, false Otherwise."""
+        # TODO: Early exit check for size before calling a O(n) worst operation
         return self.collection.contains(element)
 
     def union(self, other_set):
