@@ -1,4 +1,5 @@
 #!python
+from queue import *
 
 class BinaryNode(object):
 
@@ -201,30 +202,30 @@ class BinarySearchTree(object):
         # Return the items list to the original caller
         return items
 
-#     def items_level_order(self):
-#         """Return a list of all items in this binary search tree found using
-#         level-order traversal"""
-#         # TODO: Create a queue to store nodes not yet traversed in level-order
-#         queue = ...
-#         # Create an items list
-#         items = list()
-#         # TODO: Enqueue the root node if this tree is not empty
-#         if ...:
-#             queue...
-#         # TODO: Loop until the queue is empty
-#         while ...:
-#             # TODO: Dequeue the node at the front of the queue
-#             node = ...
-#             # TODO: Add this node's data to the items list
-#             ...
-#             # TODO: Enqueue this node's left child if it exists
-#             if ...:
-#                 ...
-#             # TODO: Enqueue this node's right child if it exists
-#             if ...:
-#                 ...
-#         # Return the items list
-#         return items
+    def items_level_order(self):
+        """Return a list of all items in this binary search tree found using
+        level-order traversal"""
+        # TODO: Create a queue to store nodes not yet traversed in level-order
+        queue = Queue()
+        # Create an items list
+        items = list()
+        # TODO: Enqueue the root node if this tree is not empty
+        if self.root:
+            queue.enqueue(self.root)
+        # TODO: Loop until the queue is empty
+        while not queue.is_empty():
+            # TODO: Dequeue the node at the front of the queue
+            node = queue.dequeue()
+            # TODO: Add this node's data to the items list
+            items.append(node.data)
+            # TODO: Enqueue this node's left child if it exists
+            if node.left:
+                queue.enqueue(node.left)
+            # TODO: Enqueue this node's right child if it exists
+            if node.right:
+                queue.enqueue(node.right)
+        # Return the items list
+        return items
 #
 
 def test_binary_search_tree():
