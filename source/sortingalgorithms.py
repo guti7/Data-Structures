@@ -1,5 +1,7 @@
 #!python
 
+from binarysearchtree import BinarySearchTree
+
 def bubble_sort(items):
     sorted_items = items
     n = len(items)
@@ -34,13 +36,19 @@ def insertion_sort(items):
             j -= 1
     return items
 
+def tree_sort(items):
+    tree = BinarySearchTree(items)
+    return tree.items_in_order()
+
+
 def test_sorting():
     array = [2, 4, 3, 1, 5]
     print(array)
     # print(bubble_sort(array))
     # assert bubble_sort(array) == [1, 2, 3, 4, 5]
     # print(selection_sort(array))
-    print(insertion_sort(array))
+    # print(insertion_sort(array))
+    print(tree_sort(array))
 
 if __name__ == '__main__':
     test_sorting()
