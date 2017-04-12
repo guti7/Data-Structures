@@ -26,12 +26,21 @@ def selection_sort(items):
         # print("iteration {}: {}".format(i, items))
     return items
 
+def insertion_sort(items):
+    for i in range(1, len(items)):
+        j = i
+        while j > 0 and items[j - 1] > items[j]:
+            items[j], items[j - 1] = items[j - 1], items[j]
+            j -= 1
+    return items
+
 def test_sorting():
     array = [2, 4, 3, 1, 5]
     print(array)
     # print(bubble_sort(array))
     # assert bubble_sort(array) == [1, 2, 3, 4, 5]
-    print(selection_sort(array))
+    # print(selection_sort(array))
+    print(insertion_sort(array))
 
 if __name__ == '__main__':
     test_sorting()
