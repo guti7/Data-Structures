@@ -145,6 +145,22 @@ class BinarySearchTree(object):
         # TODO: Increase the tree size
         self.size += 1
 
+    def delete(self, item):
+        """Remove the given item from this binary search tree."""
+        # TODO: implement
+        if self.is_empty():
+            raise ValueError("Item not found: {}".format(self))
+        # find parent node where item is located
+        parent = self._find_parent_node(item)
+        if parent is None:  # root only
+            if self.root.data == item:
+                self.root = None
+                self.size -= 0
+        else:  # tree with more than one node
+            pass
+
+
+
     def items_in_order(self, node=None, items=None):
         """Return a list of all items in this binary search tree found using
         in-order traversal starting at the given node after the given items"""
@@ -256,10 +272,10 @@ def test_binary_search_tree():
     print('search({}): {}'.format(item, result))
 
     print('\nTraversing items:')
-    # print('items in-order:    ' + str(bst.items_in_order()))
-    # print('items pre-order:   ' + str(bst.items_pre_order()))
-    # print('items post-order:  ' + str(bst.items_post_order()))
-    # print('items level-order: ' + str(bst.items_level_order()))
+    print('items in-order:    ' + str(bst.items_in_order()))
+    print('items pre-order:   ' + str(bst.items_pre_order()))
+    print('items post-order:  ' + str(bst.items_post_order()))
+    print('items level-order: ' + str(bst.items_level_order()))
 
 
 if __name__ == '__main__':
