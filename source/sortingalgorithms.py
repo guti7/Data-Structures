@@ -3,6 +3,7 @@
 from binarysearchtree import BinarySearchTree
 
 def bubble_sort(items):
+    #  TODO: passed by value
     sorted_items = items
     n = len(items)
     swapped = True
@@ -19,6 +20,7 @@ def selection_sort(items):
 
     for i in range(len(items)):  # look into the whole list
         min_index = i  # start with placeholder at first item
+        # TODO: j could be named more explicitly : offset?
         j = i + 1  # compare to the next index
         for j in range(j, len(items)):  # start from the next over index to end of list
             if items[j] < items[min_index]:

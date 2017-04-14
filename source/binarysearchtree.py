@@ -135,7 +135,7 @@ class BinarySearchTree(object):
         # Find the parent node of where the given item should be inserted
         parent = self._find_parent_node(item)
         # TODO: Check if the given item should be inserted left of the parent node
-        if item < parent.data:
+        if item <= parent.data:
             # TODO: Create a new node and set the parent's left child
             parent.left = BinaryNode(item)
         # TODO: Check if the given item should be inserted right of the parent node
