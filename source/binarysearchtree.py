@@ -153,9 +153,15 @@ class BinarySearchTree(object):
                 parent.right = BinaryNode((item, value + 1))
             # TODO: Increase the tree size
         # else:
-        #     if item == self.root.data[0]:
-        #         value = self.root.data[1]
-        #         self.root = BinaryNode((item, value + 1))
+            # if item < self.root.data[0]:
+            #     value = 0
+            #     self.root.left = BinaryNode((item, value + 1))
+            #
+            # if item > self.root.data[0]:
+            #     value = self.root.data[1]
+            #     self.root = BinaryNode((item, value + 1))
+            # value = self.root.data[1]
+            # self.root = BinaryNode((item, value + 1))
         self.size += 1
 
     # def delete(self, item):

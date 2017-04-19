@@ -39,6 +39,7 @@ def insertion_sort(items):
     return items
 
 def tree_sort(items):
+    print(items)
     tree = BinarySearchTree(items)
     return tree.items_in_order()
 
@@ -52,19 +53,24 @@ def counting_sort(items):
     for i in range(length):  # 0 to
         value = items[i]
         count[value] += 1
-    print('Counts: {}'.format(count))
+    # print('Counts: {}'.format(count))
 
     # Sum up counts to calculate the actual ordered position for each key
     for i in range(1, k):
         count[i] += count[i - 1]
-    print('Sum: {}'.format(count))
+    # print('Sum: {}'.format(count))
 
     output = [0 for _ in items]
+    output = []
+    for _ in items:
+        output.append(0)
+
+
     for i in range(length):
-        count_index = items[i]
-        position = count[count_index] - 1
-        output[position] = items[i]
-        count[count_index] -= 1
+        value = items[i]
+        position = count[value] - 1
+        output[position] = value
+        count[value] -= 1
 
     return output
 
@@ -85,14 +91,20 @@ def human_sort(orig):
 
 def test_sorting():
     array = [2, 1, 5, 2, 2, 1, 4, 0]
+    expected = [0, 1, 1, 2, 2, 2, 4, 5]
     print(array)
-    # print(bubble_sort(array))
-    # assert bubble_sort(array) == [1, 2, 3, 4, 5]
-    # print(selection_sort(array))
-    # print(insertion_sort(array))
-    # print(tree_sort(array))
-    # print(human_sort(array))
-    print('test: {}.'.format(counting_sort(array)))
+    print('bubble: {}.'.format(bubble_sort(array)))
+
+    array = [2, 1, 5, 2, 2, 1, 4, 0]
+    # assert bubble_sort(array) == expected
+    print('selection: {}.'.format(selection_sort(array)))
+    array = [2, 1, 5, 2, 2, 1, 4, 0]
+    print('insertion: {}.'.format(insertion_sort(array)))
+    array = [2, 1, 5, 2, 2, 1, 4, 0]
+    print('tree: {}.'.format(tree_sort(array)))
+    array = [2, 1, 5, 2, 2, 1, 4, 0]
+    print('human: {}.'.format(human_sort(array)))
+    print('counting: {}.'.format(counting_sort(array)))
 
 if __name__ == '__main__':
     test_sorting()
