@@ -21,14 +21,17 @@ def merge(list1, list2):
 
     return result
 
-
 def merge_sort(items):
+    return merge_sort_recursive(items)
+
+
+def merge_sort_recursive(items):
     size = len(items)
     if size <= 1:
         return items
     middle = size / 2
-    left = merge_sort(items[:middle])
-    right = merge_sort(items[middle:])
+    left = merge_sort_recursive(items[:middle])
+    right = merge_sort_recursive(items[middle:])
     return merge(left, right)
 
 def test_merge():
